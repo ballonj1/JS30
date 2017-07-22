@@ -31,28 +31,84 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    inventors.map(inventor => `${inventor.first} ${inventor.last}`);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    inventors.sort(compare)
+
+    // const compare = (a, b) => {
+    //   if (a < b) {
+    //     return 1;
+    //   } else if (b > a) {
+    //     return -1;
+    //   } else {
+    //     return 0;
+    //   }
+    // };
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    inventors.reduce((accum, inventor, currentIndex) => {
+      return accum + inventor.passed - inventor.year;
+    }, 0);
 
     // 5. Sort the inventors by years lived
-
+    inventors.sort(compare);
+    //
+    // const compare = (a, b) => {
+    //   aLife = a.passed - b.year;
+    //   bLife = b.passed - b.year;
+    //
+    //   if (aLife > bLife) {
+    //     return -1;
+    //   } else if (aLife < bLife) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // };
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const compare = (a, b) => {
+      aLastName = a.match(/.+?(?=,)/);
+      bLastName = b.match(/.+?(?=,)/);
 
+      if (aLastName < bLastName) {
+        return -1;
+      } else if (aLastName > bLastName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+
+    people.sort(compare);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const dataCount = {};
+
+    data.forEach((datum) = > {
+      if (dataCount.datum === 'undefined') {
+        dataCount.datum = 0;
+      } else {
+        dataCount.datum += 1;
+      }
+    });
+
+    console.log(dataCount);
+
+
 
   </script>
 </body>
