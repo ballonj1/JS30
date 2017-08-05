@@ -63,17 +63,40 @@
 
     // The same thing goes for objects, let's say we have a person object
 
+
     // with Objects
+    const person = {
+      name: 'John Ballon',
+      age: 80
+    };
 
     // and think we make a copy:
     const captain = person;
     captain.number = 99;
 
     // how do we take a copy instead?
-    Object.assign({}, person);
+    const cap2 = Object.assign({}, person, { number: 99});
+
+    console.log(cap2);
     // We will hopefully soon see the object ...spread
+    // const cap3 = {...person};
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const john = {
+      name: 'John',
+      age: 100,
+      likes: {
+        running: 'far',
+        meditating: 'a lot'
+      }
+    };
+
+    const jb = Object.assign({}, john);
+    console.log(jb);
+    console.log(john);
+
+    const jb2 = JSON.parse(JSON.stringify(jb));
 
   </script>
 
