@@ -31,13 +31,29 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+  // console.table(items);
+
   function addItem(e) {
     e.preventDefault();
     const text = (this.querySelector('[name=item]')).value;
     const item = {
       text,
       done: false
-    }
+    };
+    items.push(item);
+    populateList(items, itemsList);
+    this.reset();
+  }
+
+  function populateList(plates = [], platesList) {
+    // map is going to return an array of elements - join will combine the elements in the array and return a string.
+    platesList.innerHTML = plates.map((plate, i) => {
+        return `
+          <li>
+            <label for="">${plate.text}</label>
+          </li>
+        `;
+      }).join('');
   }
 
   addItems.addEventListener('submit', addItem);
