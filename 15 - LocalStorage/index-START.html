@@ -41,6 +41,11 @@
       done: false
     };
     items.push(item);
+    populateList(items, itemsList);
+    // localStorage is not actually an object - it's actually just a key value store and you can only use strings - when you try to put anything else other than a string in localStorage, it tries to turn it into a string
+
+    localStorage.setItem('items', JSON.stringify(items));
+    this.reset();
   }
 
 
@@ -49,9 +54,12 @@
     // if we'resetting innerHTML, we just need one big string
     // we therefore join the mapped arrayt
     platesList.innerHTML = plates.map((plate, i) => {
+      // for each li, we're also adding a checkbox
+      // in order make the checkbox responsive to clicks on the label, we add a for attribute that corresponds to the id of the input type="checkbox"
       return `
         <li>
-          <label for="">${plate.text}</label>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="items${i}">${plate.text}</label>
         </li>
       `;
     }).join('');
