@@ -41,21 +41,20 @@
       done: false
     };
     items.push(item);
-    populateList(items, itemsList);
-    localStorage.setItem('items', JSON.stringify(items));
-    this.reset();
   }
 
-  function populateList(plates = [], platesList) {
-    // map is going to return an array of elements - join will combine the elements in the array and return a string.
+
+
+  function populateList(plates = [], platesList){
+    // if we'resetting innerHTML, we just need one big string
+    // we therefore join the mapped arrayt
     platesList.innerHTML = plates.map((plate, i) => {
-        return `
-          <li>
-            <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : '' } />
-            <label for="item${i}">${plate.text}</label>
-          </li>
-        `;
-      }).join('');
+      return `
+        <li>
+          <label for="">${plate.text}</label>
+        </li>
+      `;
+    }).join('');
   }
 
   addItems.addEventListener('submit', addItem);
